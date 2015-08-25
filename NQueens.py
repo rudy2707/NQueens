@@ -5,7 +5,7 @@ import colorama
 import random
 
 # Number of queens
-N = 15
+N = 10
 
 def plot_queens(queens, conflicts=None):
     """Print the board with the queens.
@@ -67,6 +67,7 @@ def main():
     """Main function."""
     # Generate the first position of the queens and print it.
     queens = random.sample(range(N), N)
+    cnt = 1
 
     print("First board :")
     plot_queens(queens, search_conflicts(queens))
@@ -74,9 +75,11 @@ def main():
     # Look for a solution by generating random boards.
     while any(search_conflicts(queens)):
         queens = random.sample(range(N), N)
+        cnt = cnt + 1
 
     print("\nA solution :")
     plot_queens(queens, search_conflicts(queens))
+    print("\nNumber of tries : ", cnt)
 
 
 if __name__ == '__main__':
