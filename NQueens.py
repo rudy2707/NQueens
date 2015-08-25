@@ -2,7 +2,9 @@
 # -*- coding:utf-8 -*-
 
 import colorama
+import random
 
+# Number of queens
 N = 4
 
 def plot_queens(queens, conflicts=None):
@@ -25,15 +27,23 @@ def plot_queens(queens, conflicts=None):
                 print("o", end=' ')
         print("")
 
-
 def search_conflicts(queens):
-    print("test")
+    conflicts = [0] * N
 
+    # find conflicts in diagonals
+    for i in range(N):
+        for j in range(N):
+            if i != j:
+                if abs(queens[j] - queens[i]) == abs(j - i):
+                    conflicts[j] = 1
+
+    return conflicts
 
 def main():
-    queens = [1, 2, 3, 2]
-    conflicts = [0, 1, 0, 1]
-    plot_queens(queens, conflicts)
+    # generate the queens
+    queens = random.sample(range(N), N)
+
+    print(search_conflicts(queens))
 
 if __name__ == '__main__':
     main()
