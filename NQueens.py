@@ -2,6 +2,12 @@
 # -*- coding:utf-8 -*-
 
 
+def plot_queens(queens, conflicts=None):
+
+
+def search_conflicts(queens):
+
+
 def main():
     print("test")
 
