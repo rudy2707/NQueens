@@ -5,20 +5,30 @@ import colorama
 import random
 
 # Number of queens
-N = 20
+N = 15
 
 def plot_queens(queens, conflicts=None):
+    """Print the board with the queens.
+
+    A queen is represented by a 'x' on the board and an empty case by a 'o'.
+    If there is a conflicts, the 'x' is red, else it's green.
+
+    Keyword arguments:
+    queens      -- the list with the positions of the queens
+    conflicts   -- optional list with the conflicts between the queens
+    """
+
     colorama.init()
 
-    # If conflicts is not provided, we create a list with 0.
+    # If conflicts is not provided, we create a list with 0
     if conflicts is None:
         conflicts = [0] * N
     # Print the board.
-    # A queen is represented by a 'x', an empty case by a 'o'.
+    # A queen is represented by a 'x', an empty case by a 'o'
     for i in range(N):
         for j in range(N):
             if i == queens[j]:
-                # If a queen threat another one, the color is red, else green.
+                # If a queen threat another one, the color is red, else green
                 if conflicts[j]:
                     print(colorama.Fore.RED + "x" + colorama.Style.RESET_ALL, end=' ')
                 else:
@@ -27,10 +37,24 @@ def plot_queens(queens, conflicts=None):
                 print("o", end=' ')
         print("")
 
+
 def search_conflicts(queens):
+    """Search the conflicts between the queens.
+
+    The positions of the queens are stored in a list.
+    The index represents the column and the value the line number.
+
+    There is no conflict in the column or the line, so we only need to check the diagonals.
+    If the difference of the i and the j position are the same between the queens,
+    they are on the same diagonal.
+
+    Keyword arguments:
+    queens      -- the list with the positions of the queens
+    """
+
     conflicts = [0] * N
 
-    # find conflicts in diagonals
+    # Find conflicts in diagonals
     for i in range(N):
         for j in range(N):
             if i != j:
@@ -40,13 +64,14 @@ def search_conflicts(queens):
     return conflicts
 
 def main():
-    # generate the queens
+    """Main function."""
+    # Generate the first position of the queens and print it.
     queens = random.sample(range(N), N)
 
     print("First board :")
     plot_queens(queens, search_conflicts(queens))
 
-    # Generate a random board while there are conflicts.
+    # Look for a solution by generating random boards.
     while any(search_conflicts(queens)):
         queens = random.sample(range(N), N)
 
