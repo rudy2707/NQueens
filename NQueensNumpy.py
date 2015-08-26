@@ -79,7 +79,7 @@ def main():
     # Look for a solution by generating random boards.
     while any(search_conflicts(queens)):
         numpy.random.shuffle(queens)
-        cnt = cnt + 1
+        cnt += 1
 
     print("\nA solution :")
     plot_queens(queens, search_conflicts(queens))
