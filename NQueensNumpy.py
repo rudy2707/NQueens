@@ -24,7 +24,7 @@ def plot_queens(queens, conflicts=None):
 
     # If conflicts is not provided, we create a list with 0
     if conflicts is None:
-        conflicts = [0] * N
+        conflicts = numpy.zeros(N,)
     # Print the board.
     # A queen is represented by a 'x', an empty case by a 'o'
     for i in range(N):
@@ -54,7 +54,7 @@ def search_conflicts(queens):
     queens      -- the list with the positions of the queens
     """
 
-    conflicts = [0] * N
+    conflicts = numpy.zeros(N,)
 
     # Find conflicts in diagonals
     for i in range(N):
