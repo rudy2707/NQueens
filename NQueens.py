@@ -56,10 +56,10 @@ def search_conflicts(queens):
 
     # Find conflicts in diagonals
     for i in range(N):
-        for j in range(N):
-            if i != j:
-                if abs(queens[j] - queens[i]) == abs(j - i):
-                    conflicts[j] = 1
+        for j in range(i+1, N):
+            if abs(queens[j] - queens[i]) == abs(j - i):
+                conflicts[i] = 1
+                conflicts[j] = 1
 
     return conflicts
 
